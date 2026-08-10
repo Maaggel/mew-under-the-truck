@@ -1,0 +1,19 @@
+return {
+  summary = "The sailor lets you back to the dock after the ship sails, and the truck holds a L5 Mew.",
+  author  = "Maaggel",
+  tags    = { "story", "quality-of-life" },
+  differences = {
+    changed = {
+      "After the S.S. Anne departs, the Vermilion City gate trigger at step (18,30) offers GO or STAY instead of always pushing the player back. The offer is repeatable and sets no flag.",
+    },
+    added = {
+      "A one-time level 5 MEW encounter on the Vermilion Dock truck, a map that vanilla ships with no bg events and no object events.",
+    },
+    known = {
+      "Map keys and script verbs are written against the platform's general shape, not the command reference. Both halves no-op with a logged warning if a map key is wrong.",
+      "The pre-departure S.S. Anne Ticket check is untouched. The GO branch does not re-check the ticket.",
+      "The S.S. Anne interior is untouched; its story scripts have already run by the time you can re-board.",
+    },
+  },
+  compat = { engine = ">=0.0.0-0 <2.0.0", modApi = 2 },
+}

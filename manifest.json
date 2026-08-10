@@ -1,0 +1,10 @@
+{
+  "id": "mew_under_the_truck",
+  "name": "Mew Under the Truck",
+  "version": "0.8.1",
+  "entry": "main.lua",
+  "api": 2,
+  "category": "QUEST",
+  "game_version": ">=0.0.0-0 <2.0.0",
+  "github": "Maaggel/mew-under-the-truck"
+}
