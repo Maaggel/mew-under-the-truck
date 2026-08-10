@@ -6,6 +6,15 @@ offering, and says the same thing if you talk to him directly. The truck on
 the dock holds a level 5 Mew that stays available until you actually catch
 it.
 
+<p align="center">
+  <img src="docs/01-sailor-offer.jpg" width="45%" alt="The sailor asks whether you want a look around the dock">
+  <img src="docs/04-no-strength.jpg" width="45%" alt="Facing the truck without STRENGTH available">
+</p>
+<p align="center">
+  <img src="docs/02-use-strength.jpg" width="45%" alt="The USE STRENGTH / LEAVE IT prompt at the truck">
+  <img src="docs/03-wild-mew.jpg" width="45%" alt="Wild MEW appeared">
+</p>
+
 ## Install
 
 Drop the `mew_under_the_truck` folder into your `mods/` directory:
