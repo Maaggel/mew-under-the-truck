@@ -1,18 +1,21 @@
 return {
-  summary = "The sailor lets you back to the dock after the ship sails, and the truck holds a L5 Mew.",
+  summary = "The sailor lets you back to the dock after the ship sails, and STRENGTH on the truck turns up MEW.",
   author  = "Maaggel",
   tags    = { "story", "quality-of-life" },
   differences = {
     changed = {
-      "After the S.S. Anne departs, the Vermilion City gate trigger at step (18,30) offers GO or STAY instead of always pushing the player back. The offer is repeatable and sets no flag.",
+      "After the S.S. Anne departs, the Vermilion gate trigger offers GO or STAY instead of always turning the player back. The offer is repeatable and sets no flag, so declining is never a lockout.",
+      "The sailor's own dialogue says the same thing once the ship has gone. His pre-departure S.S. Anne Ticket check is reproduced unchanged.",
     },
     added = {
-      "A one-time level 5 MEW encounter on the Vermilion Dock truck, a map that vanilla ships with no bg events and no object events.",
+      "A level 5 MEW under the Vermilion Dock truck, a map vanilla ships with no bg events and no object events at all.",
+      "Requires the RAINBOWBADGE plus STRENGTH, either taught to a party member or owned in the bag alongside the HM Anywhere mod, which this detects.",
     },
     known = {
-      "Map keys and script verbs are written against the platform's general shape, not the command reference. Both halves no-op with a logged warning if a map key is wrong.",
-      "The pre-departure S.S. Anne Ticket check is untouched. The GO branch does not re-check the ticket.",
-      "The S.S. Anne interior is untouched; its story scripts have already run by the time you can re-board.",
+      "The truck object never moves; only the text says it shifts.",
+      "MEW is retired only once it is actually caught. Faint it, let it flee, or black out, and the truck stirs again.",
+      "The S.S. Anne interior is untouched; its story scripts have already run by the time you can re-board. The point is that the dock stays reachable so you can Surf from it.",
+      "The GO branch does not re-check the S.S. Anne Ticket.",
     },
   },
   compat = { engine = ">=0.0.0-0 <2.0.0", modApi = 2 },

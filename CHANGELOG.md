@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.8.3] - 2026-08-11
+
+### Fixed
+
+- mod.card was still describing the pre-STRENGTH behaviour: it called the
+  encounter one-time, and its known-issues list carried placeholder-era
+  caveats about unverified map keys and script verbs that stopped being true
+  several versions ago. Rewritten to match what the mod actually does.
+
+## [0.8.2] - 2026-08-10
+
+### Added
+
+- Four screenshots in the README, under `docs/`.
+
 ## [0.8.1] - 2026-08-10
 
 ### Changed
