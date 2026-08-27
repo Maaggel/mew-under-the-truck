@@ -115,7 +115,64 @@ return function(mod)
     }
   end
 
+  -- ------------------------------------------------------------------
+  -- Staying on the dock
+  --
+  -- VERMILION_DOCK's own onEnter evicts anyone who arrives after the ship
+  -- has gone:
+  --
+  --     if Flags.get(game.save, "EVENT_SS_ANNE_LEFT") then
+  --       ... erase the ship ...
+  --       game.stack:push(TextBox.new(game, "The ship set sail.", function()
+  --         ow:startWarpTo("VERMILION_CITY", 18, 29, "up")
+  --       end))
+  --
+  -- onEnter is an all-run hook, so registering one here does not replace
+  -- that -- both run, mods first, and `false` suppresses talk and legacy
+  -- keys but not an all-run hook. The eviction has to be neutralised
+  -- rather than prevented.
+  --
+  -- The ship-erasing above it is wanted: it is what opens the water the
+  -- truck is reached across. Only the text box and the warp inside its
+  -- callback need to go, and since the warp lives in that callback,
+  -- swallowing the push takes both.
+  --
+  -- One push, on the frame this fires, and only while the eviction branch
+  -- can actually be running. The stub restores itself on the first call,
+  -- and a step-hook restore catches the case where the branch never fires.
+  local restoreDockPush = nil
+
+  local function armDockStay(game)
+    if restoreDockPush then return end
+    local stack = game and game.stack
+    if not stack or type(stack.push) ~= "function" then return end
+    local real = stack.push
+    local stub
+    stub = function()
+      if stack.push == stub then stack.push = real end
+      restoreDockPush = nil
+      return nil   -- swallowed: no message, so no callback, so no warp
+    end
+    restoreDockPush = function()
+      if stack.push == stub then stack.push = real end
+      restoreDockPush = nil
+    end
+    stack.push = stub
+  end
+
+  mod.hooks:wrap("input.step", function(next, game, dt)
+    next(game, dt)
+    -- The eviction pushes during the same dispatch as the onEnter below, so
+    -- by the next step it has either happened or it never will.
+    if restoreDockPush then restoreDockPush() end
+  end)
+
   mod.content.map_scripts:register("VERMILION_DOCK", {
+    onEnter = function(game, ow)
+      local flags = (game.save and game.save.flags) or {}
+      if flags.EVENT_SS_ANNE_LEFT then armDockStay(game) end
+    end,
+
     onInteract = function(game, ow, fx, fy)
       if ow.player.facing ~= "up" then return false end
       if not TRUCK[fx .. "," .. fy] then return false end

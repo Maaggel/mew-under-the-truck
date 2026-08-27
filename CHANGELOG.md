@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.9.0] - 2026-08-23
+
+### Fixed
+
+- Reaching the dock showed "The ship set sail." and warped the player straight
+  back to the sailor, so the truck was unreachable after all.
+
+  `VERMILION_DOCK.onEnter` evicts anyone who arrives once EVENT_SS_ANNE_LEFT is
+  set: it erases the ship, then pushes a text box whose dismiss callback calls
+  `startWarpTo("VERMILION_CITY", 18, 29, "up")`. `onEnter` is an all-run hook,
+  so registering one alongside it does not replace it, and `false` suppresses
+  talk and legacy keys but not an all-run hook -- the eviction has to be
+  neutralised rather than prevented.
+
+  The ship-erasing is wanted: it is what opens the water the truck is reached
+  across. Only the message and the warp need to go, and since the warp lives
+  inside the message's callback, swallowing that one push takes both. The stub
+  is armed on entering the dock, restores itself on the first push, and a
+  step-hook restore catches the case where the eviction branch never fires.
+
 ## [0.8.3] - 2026-08-11
 
 ### Fixed

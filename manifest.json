@@ -1,7 +1,7 @@
 {
   "id": "mew_under_the_truck",
   "name": "Mew Under the Truck",
-  "version": "0.8.3",
+  "version": "0.9.0",
   "entry": "main.lua",
   "api": 2,
   "category": "QUEST",
